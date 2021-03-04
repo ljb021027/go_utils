@@ -2,30 +2,28 @@ package main
 
 import (
 	"fmt"
+	"sync"
 	"testing"
-	"time"
 )
 
 func Test(t *testing.T) {
-	c1 := make(chan int)
-	c2 := make(chan int)
+	var result interface{}
+	result = "3"
+	_, ok := result.(string)
+	fmt.Println(ok)
+	fmt.Println(result == "3")
 
-	go func() {
-		time.Sleep(3*time.Second)
-		c1<-1
-		c2<-1
-	}()
+}
 
+func TestLock(t *testing.T) {
+	lock := sync.RWMutex{}
+	lock.RLock()
+	lock.RLock()
 
-	for {
-		select {
-		case <-c1:
-			fmt.Println("c1")
-		case <-c2:
-			fmt.Println("c2")
-		}
-		fmt.Println("ee")
-	}
+	defer lock.RUnlock()
+	lock.Lock()
+	defer lock.Unlock()
 
+	fmt.Println(11)
 
 }
