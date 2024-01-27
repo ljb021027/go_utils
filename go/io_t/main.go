@@ -8,6 +8,8 @@ import (
 )
 
 func main() {
+	request := http.Request{}
+	request.Close = true
 	get, err := http.DefaultClient.Get("http://localhost:28000")
 	if err != nil {
 		panic(err)

@@ -8,13 +8,44 @@ import (
 
 	"github.com/google/go-querystring/query"
 	"github.com/gorilla/schema"
+	"github.com/stretchr/testify/assert"
 )
 
 type Abc struct {
+	Name  string
+	Names []string
 }
 
 func (Abc) Method1(a string, b int) {
 
+}
+
+func TestValue(t *testing.T) {
+	abcs := []Abc{
+		{
+			Name: "ljb",
+		},
+	}
+	values, err := query.Values(abcs)
+	if err != nil {
+		assert.NoError(t, err)
+	}
+	fmt.Println(values)
+
+	abc := Abc{
+		Names: []string{"ljb"},
+	}
+	values, err = query.Values(abc)
+	if err != nil {
+		assert.NoError(t, err)
+	}
+	fmt.Println(values)
+
+	encoder := schema.NewEncoder()
+	form := url.Values{}
+	err = encoder.Encode(abcs, form)
+	assert.NoError(t, err)
+	fmt.Println(form)
 }
 
 var opt2 = Options{

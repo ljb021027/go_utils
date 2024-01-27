@@ -24,16 +24,24 @@ func (l *List) toString() string {
 	}
 	return sb.String()
 }
-
+func reverse5(list *List) *List {
+	if list.next == nil {
+		return list
+	}
+	newList := reverse5(list.next)
+	list.next.next = list
+	list.next = nil
+	return newList
+}
 func main() {
 	list := &List{
-		val: "0",
+		val: "1",
 		next: &List{
-			val: "1",
+			val: "2",
 			next: &List{
-				val: "2",
+				val: "3",
 				next: &List{
-					val:  "3",
+					val:  "4",
 					next: nil,
 				},
 			},
@@ -41,7 +49,9 @@ func main() {
 	}
 
 	fmt.Println(list.toString())
-	l := reverse4(list)
+	fmt.Println("------")
+	l := reverse5(list)
+	fmt.Println("------")
 	fmt.Println(l.toString())
 }
 func reverse2(list *List) *List {

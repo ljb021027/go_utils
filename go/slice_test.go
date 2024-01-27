@@ -2,6 +2,7 @@ package _go
 
 import (
 	"fmt"
+	"net/url"
 	"reflect"
 	"sort"
 	"strconv"
@@ -22,6 +23,20 @@ func TestArray(t *testing.T) {
 		v = append(v, 4)
 		fmt.Printf("%d%d ", i, v[i])
 	}
+}
+
+func Test111(t *testing.T) {
+	arr := make([]string, 3)
+
+	for i := 0; i < 100; i++ {
+		ap(&arr)
+		fmt.Println(arr)
+	}
+
+}
+
+func ap(arr *[]string) {
+	*arr = append(*arr, "1")
 }
 
 func TestBigArr(t *testing.T) {
@@ -123,4 +138,31 @@ func TestSortTimeStr(t *testing.T) {
 	sort.Strings(strings)
 
 	fmt.Println(strings)
+}
+
+func TestMap(t *testing.T) {
+	m := map[string]string{
+		"1": "1",
+	}
+	aaa(m)
+	fmt.Println(m)
+}
+
+func aaa(mmm map[string]string) {
+	m2 := make(map[string]string)
+	m2["2"] = "2"
+	mmm["11"] = "11"
+
+}
+
+func TestUrl(t *testing.T) {
+	escape := url.QueryEscape("*")
+	fmt.Println(escape)
+	pathEscape := url.PathEscape("*")
+	fmt.Println(pathEscape)
+
+	escape = url.QueryEscape(" ")
+	fmt.Println(escape)
+	pathEscape = url.PathEscape(" ")
+	fmt.Println(pathEscape)
 }

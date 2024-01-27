@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
+	"time"
 )
 
 type errReader int
@@ -29,5 +30,22 @@ func HandlePostRequest(w http.ResponseWriter, r *http.Request) {
 	}
 	r.Body.Close()
 	r.Body = ioutil.NopCloser(bytes.NewBuffer(body))
+
+}
+
+func TestStr(t *testing.T) {
+	bytes := []byte("123")
+	fmt.Println(bytes)
+	sprintf := fmt.Sprintf("%v", bytes)
+	fmt.Println(sprintf)
+
+}
+
+func TestTime(t *testing.T) {
+	parse, err := time.Parse("2006-1-02", "2021-11-01")
+	if err != nil {
+		t.Error(err)
+	}
+	fmt.Println(parse)
 
 }

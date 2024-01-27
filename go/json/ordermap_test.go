@@ -94,3 +94,12 @@ func TestMap(t *testing.T) {
 	fmt.Println(result)
 
 }
+
+func TestMap1(t *testing.T) {
+	m := make(map[string]string, 0)
+	s, ok := m["1"]
+	fmt.Println(s)
+	fmt.Println(ok)
+
+	fmt.Println(m)
+}
